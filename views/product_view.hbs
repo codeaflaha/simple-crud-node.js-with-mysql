@@ -1,0 +1,221 @@
+<html>
+   <head>
+      <title>Dashboard | Perpustakaan</title>
+	  <link href="assets/css/alert.css" rel="stylesheet" type="text/css" >
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/sb-admin-2.css" rel="stylesheet" type="text/css"  />
+		<link rel="stylesheet" href="assets/js/jquery-ui.css" type="text/css"  />
+		<link rel="stylesheet" href="assets/js/jquery-ui-smooth.css" type="text/css" />
+		
+   </head>
+<body>
+   <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.php">Perpustakaan</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="profile.php"><span class="glyphicon glyphicon-tasks"></span>&nbsp;Profile</a></li>
+						<li><a href="ganti_password.php"><span class="glyphicon glyphicon-lock"></span>&nbsp;Ganti Password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="../logout.php"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+             </li>
+          </ul>
+        </div>
+      </div>
+    </nav> 
+
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+           
+					
+			<li><a href="/"><span class="glyphicon glyphicon-user"></span>&nbsp;Data Anggota</a></li>
+			
+			
+			</li>
+			
+			  <ul class="nav nav-sidebar">
+           
+        </div>
+        
+
+<div id="page-wrapper">
+	<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Data Anggota</h1>
+                </div>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">Tambah Data Anggota</button>
+                <!-- /.col-lg-12 -->
+	</div>
+   
+	<hr>
+
+	<div class="row">
+		<div class="col-lg-12">	
+     <table class="table table-striped table-bordered table-hover" id="mytable"> 
+			<tr>
+				
+				<th>Id Siswa</th>
+				<th>NamaSiswa</th>
+				<th>kelas</th>
+				
+				<th colspan="2"><center>Action</center></th>
+			</tr>
+					{{#each results}}
+					<tr>
+            
+						<td>{{ id_siswa }}</td>
+         		<td>{{ nama_siswa }}</td>
+      			<td>{{ kelas }}</td>											
+						<td> <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-id_siswa="{{ id_siswa }}" data-nama_siswa="{{ nama_siswa }}" data-kelas="{{ kelas }}">Edit</a>
+            <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" data-id_siswa="{{ id_siswa }}">Delete</a></td>
+	         
+					</tr>
+					
+			 {{/each}}
+		  </table>
+		  <br>		  						
+		  </div>
+	</div>
+</div>
+<!-- Add New Product Modal-->
+    <form action="/save" method="post">
+        <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">tambah data siswa</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body">
+               <div class="form-group">
+                   <input type="text" name="nama_siswa" class="form-control" placeholder=" Name siswa" required>
+               </div>
+
+               <div class="form-group">
+                   <input type="text" name="kelas" class="form-control" placeholder="kelas" required>
+               </div>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary">Save</button>
+             </div>
+           </div>
+         </div>
+        </div>
+   </form>
+    <!-- Edit Product Modal-->
+   <form action="/update" method="post">
+       <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                  <input type="text" name="nama_siswa" class="form-control nama_siswa" placeholder="nama_siswa" required>
+              </div>
+
+              <div class="form-group">
+                  <input type="text" name="kelas" class="form-control kelas" placeholder="kelas" required>
+              </div>
+              
+            </div>
+            <div class="modal-footer">    
+              <input type="hidden" name="id_siswa" class="id_siswa">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+       </div>
+  </form>
+ <!-- Delete Product Modal-->
+    <form id="add-row-form" action="/delete" method="post">
+       <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Delete siswa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                 </div>
+                
+                 <div class="modal-body">
+                         <strong>Are You Sure To Delete This Data?</strong>
+                 </div>
+                 
+                 <div class="modal-footer">
+                      <input type="hidden" name="id_siswa" class="form-control id_siswa2" required>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success">Delete</button>
+                 </div>
+              </div>
+          </div>
+       </div>
+   </form>
+
+<div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>&copy; 2020 -</p>
+                    <p>web ini hanya sample saja.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+    <script src="assets/js/jquery-3.1.1.min.js"></script>
+    <script src="assets/js/jquery-ui.js"></script>
+    <script src="assets/js/sb-admin-2.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+ <script>
+    $(document).ready(function(){
+      //showing data to modal for edit record
+      $('#mytable').on('click','.edit',function(){
+        var id_siswa = $(this).data('id_siswa');
+        var nama_siswa = $(this).data('nama_siswa');
+        var kelas = $(this).data('kelas');
+        $('#EditModal').modal('show');
+        $('.nama_siswa').val(nama_siswa);
+        $('.kelas').val(kelas);
+        $('.id_siswa').val(id_siswa);
+      });
+      //showing modal for delete record
+      $('#mytable').on('click','.delete',function(){
+        var id_siswa = $(this).data('id_siswa');
+        $('#DeleteModal').modal('show');
+        $('.id_siswa2').val(id_siswa);
+      });
+
+    });
+</script>   
+</body>
+</html>
